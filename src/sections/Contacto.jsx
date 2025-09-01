@@ -56,7 +56,7 @@ export default function Contacto() {
             Contacto
           </motion.h1>
 
-          <form className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full" onSubmit={handleSubmit}>
+          <form className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full" onSubmit={handleSubmit} action="https://formspree.io/f/xwpnbdzp" method="POST">
             {/* Ajustes para Formspree */}
             <input type="hidden" name="_subject" value="Nuevo mensaje desde el portfolio" />
             {/* Honeypot para bots */}
