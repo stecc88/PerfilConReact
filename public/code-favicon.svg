@@ -1,0 +1,25 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fondo negro (pantalla) -->
+  <rect width="64" height="64" fill="#000000" rx="4" ry="4" />
+  
+  <!-- Código verde estilo terminal/matriz -->
+  <!-- Línea 1: Corchetes y símbolos -->
+  <text x="8" y="14" fill="#00FF00" font-family="monospace" font-size="8">{const}</text>
+  
+  <!-- Línea 2: Función -->
+  <text x="6" y="24" fill="#00FF00" font-family="monospace" font-size="8">function()</text>
+  
+  <!-- Línea 3: Llaves -->
+  <text x="10" y="34" fill="#00FF00" font-family="monospace" font-size="8">{code}</text>
+  
+  <!-- Línea 4: Return -->
+  <text x="8" y="44" fill="#00FF00" font-family="monospace" font-size="8">return;</text>
+  
+  <!-- Línea 5: Cierre -->
+  <text x="12" y="54" fill="#00FF00" font-family="monospace" font-size="8">}</text>
+  
+  <!-- Cursor parpadeante -->
+  <rect x="22" y="48" width="4" height="8" fill="#00FF00">
+    <animate attributeName="opacity" values="1;0;1" dur="1.2s" repeatCount="indefinite" />
+  </rect>
+</svg>

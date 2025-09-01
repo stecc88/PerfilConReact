@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Estilos base. Tailwind maneja la mayor parte. */
+:root {
+  color-scheme: dark; /* Modo oscuro por defecto */
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
