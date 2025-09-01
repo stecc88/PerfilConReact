@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 export default function Home() {
   return (
-    <section className="relative flex flex-col items-center justify-center text-center min-h-[90vh] px-6 overflow-hidden">
+    <section className="relative flex flex-col items-center justify-center text-center min-h-[90vh] px-4 overflow-hidden">
       {/* Título y descripción */}
       <motion.h1
         initial={{ opacity: 0, y: 20 }}
@@ -52,7 +52,7 @@ export default function Home() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.6, duration: 0.8 }}
-        className="mt-14 flex gap-6 text-4xl text-zinc-500"
+        className="mt-14 flex flex-wrap justify-center gap-6 text-4xl text-zinc-500"
       >
         <i className="devicon-html5-plain colored"></i>
         <i className="devicon-css3-plain colored"></i>
