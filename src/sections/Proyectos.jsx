@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { ExternalLink } from 'lucide-react'
-import vivabuondiImg from '../assets/vivabuondi1.jpg'
+import vivabuondiiImg from '../assets/vivabuondii.jpg'
+import desarrolloImg from '../assets/desarrollo.jpg'
 
 const proyectos = [
   {
@@ -8,28 +9,28 @@ const proyectos = [
     titulo: 'VivaBuondi',
     descripcion:
       'VivaBuondì es una web responsiva hecha con HTML, CSS y Bootstrap, orientada a la enseñanza del italiano. El formulario de contacto funciona con EmailJS, permitiendo envíos sin backend.',
-    imagen: vivabuondiImg,
+    imagen: vivabuondiiImg,
     link: 'https://vivabuondi.com/',
   },
   {
     id: 2,
     titulo: 'Proyecto 2',
-    descripcion: 'Plataforma fullstack con MongoDB y Express.',
-    imagen: 'https://via.placeholder.com/400x250',
+    descripcion: 'en construcción',
+    imagen: desarrolloImg,
     link: '#',
   },
   {
     id: 3,
     titulo: 'Proyecto 3',
-    descripcion: 'Sitio responsive optimizado para SEO.',
-    imagen: 'https://via.placeholder.com/400x250',
+    descripcion: 'en construcción',
+    imagen: desarrolloImg,
     link: '#',
   },
 ]
 
 export default function Proyectos() {
   return (
-    <section className="relative py-20 px-6 overflow-hidden">
+    <section className="relative py-10 px-6 overflow-hidden">
       {/* Título */}
       <motion.h1
         initial={{ opacity: 0, y: 16 }}
@@ -53,20 +54,20 @@ export default function Proyectos() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
-            className="group relative overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900/40 shadow-lg hover:shadow-blue-600/30 transition-all duration-300"
+            className="group relative overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900/40 shadow-lg hover:shadow-blue-600/30 transition-all duration-300 flex flex-col"
           >
-            {/* Imagen */}
+            {/* Imagen*/}
             <div className="overflow-hidden">
               <img
                 src={proyecto.imagen}
                 alt={proyecto.titulo}
-                className="w-full h-48 object-cover transform group-hover:scale-110 transition duration-500"
+                className="w-full h-96 object-cover transform group-hover:scale-110 transition duration-500"
                 loading="lazy"
               />
             </div>
 
             {/* Contenido */}
-            <div className="p-5">
+            <div className="p-5 flex flex-col flex-grow h-full">
               <h2 className="font-semibold text-lg text-white">{proyecto.titulo}</h2>
               <p className="text-sm text-zinc-400 mt-2">{proyecto.descripcion}</p>
 
@@ -74,7 +75,7 @@ export default function Proyectos() {
                 href={proyecto.link}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-4 inline-flex items-center gap-2 text-sm text-blue-400 hover:text-blue-300 transition"
+                className="mt-auto inline-flex items-center gap-2 text-sm text-blue-400 hover:text-blue-300 transition"
               >
                 Ver proyecto <ExternalLink size={16} />
               </a>
