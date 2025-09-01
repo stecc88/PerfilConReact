@@ -1,6 +1,42 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 
 export default function Contacto() {
+  const [status, setStatus] = useState('idle') // idle | sending | success | error
+  const [errorMsg, setErrorMsg] = useState('')
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setStatus('sending')
+    setErrorMsg('')
+
+    const form = e.currentTarget
+    const formData = new FormData(form)
+
+    try {
+      const res = await fetch('https://formspree.io/f/xwpnbdzp', {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: formData,
+      })
+
+      // Formspree responde JSON cuando se envía Accept: application/json
+      const data = await res.json().catch(() => ({}))
+
+      if (res.ok) {
+        setStatus('success')
+        form.reset()
+      } else {
+        const errs = data?.errors?.map((e) => e.message).join(', ') || 'Error al enviar el formulario.'
+        setErrorMsg(errs)
+        setStatus('error')
+      }
+    } catch (err) {
+      setErrorMsg('No se pudo enviar. Revisa tu conexión e inténtalo nuevamente.')
+      setStatus('error')
+    }
+  }
+
   return (
     <section className="relative flex flex-col items-center justify-center px-6 py-20 overflow-hidden min-h-screen">
       {/* Contenido principal */}
@@ -20,13 +56,18 @@ export default function Contacto() {
             Contacto
           </motion.h1>
 
-          <form className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+          <form className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full" onSubmit={handleSubmit}>
+            {/* Ajustes para Formspree */}
+            <input type="hidden" name="_subject" value="Nuevo mensaje desde el portfolio" />
+            {/* Honeypot para bots */}
+            <input type="text" name="_gotcha" className="hidden" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
+
             {/* Nombre */}
             <div className="space-y-2">
               <label htmlFor="nombre" className="block text-sm font-medium text-zinc-300">Nombre</label>
               <motion.input
                 id="nombre"
-                name="nombre"
+                name="name"
                 type="text"
                 placeholder="Tu nombre"
                 initial={{ opacity: 0, y: 20 }}
@@ -60,7 +101,7 @@ export default function Contacto() {
               <label htmlFor="mensaje" className="block text-sm font-medium text-zinc-300">Mensaje</label>
               <motion.textarea
                 id="mensaje"
-                name="mensaje"
+                name="message"
                 placeholder="Escribe tu mensaje aquí..."
                 rows={6}
                 initial={{ opacity: 0, y: 20 }}
@@ -71,21 +112,29 @@ export default function Contacto() {
               />
             </div>
 
-            {/* Botón enviar */}
+            {/* Botón enviar y estado */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: 'easeOut', delay: 0.5 }}
-              className="md:col-span-2 flex justify-end"
+              className="md:col-span-2 flex flex-col items-end gap-3"
             >
               <motion.button
                 type="submit"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-6 py-3 rounded-md bg-blue-600 text-white font-medium shadow-md hover:bg-blue-500 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-zinc-900"
+                disabled={status === 'sending'}
+                whileHover={status === 'sending' ? {} : { scale: 1.05 }}
+                whileTap={status === 'sending' ? {} : { scale: 0.95 }}
+                className="px-6 py-3 rounded-md bg-blue-600 text-white font-medium shadow-md hover:bg-blue-500 disabled:opacity-60 disabled:cursor-not-allowed transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-zinc-900"
               >
-                Enviar
+                {status === 'sending' ? 'Enviando…' : 'Enviar'}
               </motion.button>
+
+              {status === 'success' && (
+                <p className="text-sm text-green-400">¡Mensaje enviado! Gracias por contactarme, te responderé pronto.</p>
+              )}
+              {status === 'error' && (
+                <p className="text-sm text-red-400">{errorMsg || 'Ocurrió un problema al enviar. Intenta nuevamente.'}</p>
+              )}
             </motion.div>
           </form>
         </div>
