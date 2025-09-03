@@ -8,7 +8,7 @@ const habilidades = [
   { nombre: 'JavaScript', icono: 'devicon-javascript-plain colored' },
   { nombre: 'React', icono: 'devicon-react-original colored' },
   { nombre: 'Git', icono: 'devicon-git-plain colored' },
-  { nombre: 'GitHub', icono: 'devicon-github-original colored' },
+  { nombre: 'GitHub', icono: 'devicon-github-original' },
   { nombre: 'Node.js', icono: 'devicon-nodejs-plain colored' },
   { nombre: 'MongoDB', icono: 'devicon-mongodb-plain colored' },
 ]
