@@ -20,26 +20,28 @@ export default function Contacto() {
         body: formData,
       })
 
-      // Formspree responde JSON cuando se envía Accept: application/json
       const data = await res.json().catch(() => ({}))
 
       if (res.ok) {
         setStatus('success')
         form.reset()
       } else {
-        const errs = data?.errors?.map((e) => e.message).join(', ') || 'Error al enviar el formulario.'
+        const errs =
+          data?.errors?.map((e) => e.message).join(', ') ||
+          'Error al enviar el formulario.'
         setErrorMsg(errs)
         setStatus('error')
       }
     } catch (err) {
-      setErrorMsg('No se pudo enviar. Revisa tu conexión e inténtalo nuevamente.')
+      setErrorMsg(
+        'No se pudo enviar. Revisa tu conexión e inténtalo nuevamente.'
+      )
       setStatus('error')
     }
   }
 
   return (
     <section className="relative flex flex-col items-center justify-center px-6 py-20 overflow-hidden min-h-screen">
-      {/* Contenido principal */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -56,15 +58,34 @@ export default function Contacto() {
             Contacto
           </motion.h1>
 
-          <form className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full" onSubmit={handleSubmit} action="https://formspree.io/f/xwpnbdzp" method="POST">
-            {/* Ajustes para Formspree */}
-            <input type="hidden" name="_subject" value="Nuevo mensaje desde el portfolio" />
-            {/* Honeypot para bots */}
-            <input type="text" name="_gotcha" className="hidden" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
+          {/* ✅ El form ya no tiene action ni method */}
+          <form
+            className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full"
+            onSubmit={handleSubmit}
+          >
+            {/* Config extra */}
+            <input
+              type="hidden"
+              name="_subject"
+              value="Nuevo mensaje desde el portfolio"
+            />
+            <input
+              type="text"
+              name="_gotcha"
+              className="hidden"
+              style={{ display: 'none' }}
+              tabIndex={-1}
+              autoComplete="off"
+            />
 
             {/* Nombre */}
             <div className="space-y-2">
-              <label htmlFor="nombre" className="block text-sm font-medium text-zinc-300">Nombre</label>
+              <label
+                htmlFor="nombre"
+                className="block text-sm font-medium text-zinc-300"
+              >
+                Nombre
+              </label>
               <motion.input
                 id="nombre"
                 name="name"
@@ -81,7 +102,12 @@ export default function Contacto() {
 
             {/* Email */}
             <div className="space-y-2">
-              <label htmlFor="email" className="block text-sm font-medium text-zinc-300">Email</label>
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-zinc-300"
+              >
+                Email
+              </label>
               <motion.input
                 id="email"
                 name="email"
@@ -98,7 +124,12 @@ export default function Contacto() {
 
             {/* Mensaje */}
             <div className="space-y-2 md:col-span-2">
-              <label htmlFor="mensaje" className="block text-sm font-medium text-zinc-300">Mensaje</label>
+              <label
+                htmlFor="mensaje"
+                className="block text-sm font-medium text-zinc-300"
+              >
+                Mensaje
+              </label>
               <motion.textarea
                 id="mensaje"
                 name="message"
@@ -112,7 +143,7 @@ export default function Contacto() {
               />
             </div>
 
-            {/* Botón enviar y estado */}
+            {/* Botón + estado */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -130,10 +161,15 @@ export default function Contacto() {
               </motion.button>
 
               {status === 'success' && (
-                <p className="text-sm text-green-400">¡Mensaje enviado! Gracias por contactarme, te responderé pronto.</p>
+                <p className="text-sm text-green-400">
+                  ¡Mensaje enviado! Gracias por contactarme, te responderé
+                  pronto.
+                </p>
               )}
               {status === 'error' && (
-                <p className="text-sm text-red-400">{errorMsg || 'Ocurrió un problema al enviar. Intenta nuevamente.'}</p>
+                <p className="text-sm text-red-400">
+                  {errorMsg || 'Ocurrió un problema al enviar. Intenta nuevamente.'}
+                </p>
               )}
             </motion.div>
           </form>
