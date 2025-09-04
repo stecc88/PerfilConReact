@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { ExternalLink } from 'lucide-react'
 import vivabuondiiImg from '../assets/vivabuondii.jpg'
 import desarrolloImg from '../assets/desarrollo.jpg'
+import tareaImg from '../assets/tarea.jpg'
 
 const proyectos = [
   {
@@ -14,10 +15,10 @@ const proyectos = [
   },
   {
     id: 2,
-    titulo: 'Proyecto 2',
-    descripcion: 'en construcción',
-    imagen: desarrolloImg,
-    link: '#',
+    titulo: 'Gestor de Tareas MERN',
+    descripcion: 'Aplicación fullstack responsiva para crear, editar y eliminar tareas. Tecnologías: MongoDB, Express, React, Node.js, Tailwind',
+    imagen: tareaImg,
+    link: 'https://primer-mern.vercel.app/',
   },
   {
     id: 3,
